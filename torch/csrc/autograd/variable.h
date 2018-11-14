@@ -408,21 +408,10 @@ struct TORCH_API Variable::Impl : public at::TensorImpl {
     return data_.unsafeGetTensorImpl()->defined();
   }
 
-  /// NOTE: The following setter functions are temporary and only used in Variable::set_data().
-  /// They will be removed once VariableImpl and TensorImpl are merged.
-  void set_data_type(caffe2::TypeMeta data_type) {
-    data_type_ = data_type;
-  }
-  void set_type_id(at::TensorTypeId type_id) {
-    type_id_ = type_id;
-  }
-  void set_is_variable(bool is_variable) {
-    is_variable_ = is_variable;
-  }
-
   at::Tensor data_;
  private:
   int64_t get_device_slow() const override;
+  friend struct Variable;
 };
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

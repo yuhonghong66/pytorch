@@ -167,9 +167,9 @@ void Variable::set_data(Tensor new_data) const {
   }
 
   // Updates metadata
-  get()->set_data_type(new_data.type().typeMeta());
-  get()->set_type_id(new_data.type().type_id());
-  get()->set_is_variable(true);
+  get()->data_type_ = new_data.type().typeMeta();
+  get()->type_id_ = new_data.type().type_id();
+  get()->is_variable_ = true;
 
   auto new_data_copy = at::Tensor(new_data.getIntrusivePtr()->shallow_copy_and_detach());
   // NOTE: this is the only place where we change the ownership of the AutogradMeta pointer
